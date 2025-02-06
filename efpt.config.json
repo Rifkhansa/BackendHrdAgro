@@ -1,0 +1,382 @@
+﻿{
+   "CodeGenerationMode": 4,
+   "ContextClassName": "DatabaseContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": true,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Models",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "BackendHrdAgro",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 2,
+   "SelectedToBeGenerated": 0,
+   "T4TemplatePath": null,
+   "Tables": [
+      {
+         "Name": "bjb_tm_bank",
+         "ObjectType": 0
+      },
+      {
+         "Name": "bjb_tm_claim_document",
+         "ObjectType": 0
+      },
+      {
+         "Name": "bjb_tm_claim_general_document",
+         "ObjectType": 0
+      },
+      {
+         "Name": "bjb_tm_claim_risk",
+         "ObjectType": 0
+      },
+      {
+         "Name": "bjb_tm_claim_type",
+         "ObjectType": 0
+      },
+      {
+         "Name": "bjb_tm_insurance",
+         "ObjectType": 0
+      },
+      {
+         "Name": "bjb_tm_periode",
+         "ObjectType": 0
+      },
+      {
+         "Name": "bjb_tm_product",
+         "ObjectType": 0
+      },
+      {
+         "Name": "bjb_tm_range_time",
+         "ObjectType": 0
+      },
+      {
+         "Name": "bjb_tp_claim",
+         "ObjectType": 0
+      },
+      {
+         "Name": "bjb_tp_claim_document",
+         "ObjectType": 0
+      },
+      {
+         "Name": "bjb_tp_claim_document_additional",
+         "ObjectType": 0
+      },
+      {
+         "Name": "bjb_tp_transaction",
+         "ObjectType": 0
+      },
+      {
+         "Name": "otp_logs",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_application",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_bank",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_cob",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_days",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_department",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_division_head",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_employee_affair",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_employee_affair_document",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_employee_affair_general_document",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_employee_backup",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_employee_status",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_holiday_date",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_hubungan",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_inisial_cuti",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_inisial_cuti_2017",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_inventory",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_letter_form",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_letter_type",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_level",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_married",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_menu",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_problem_category",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_reason",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_reimbursment",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_religi",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_request",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_role",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_security",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_sex",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_sisa_cuti",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_sisa_cuti_2017",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_studi",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_third_party",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_title",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_type",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_type_cuti",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_type_ins",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_user_groups",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tm_users",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tp_absent",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tp_absent_foto",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tp_absent_old",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tp_absent_revisi",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tp_absent2",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tp_absentee",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tp_absentee_periode",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tp_cuti",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tp_cuti_calculate",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tp_datainventory",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tp_detail_cuti",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tp_employee_affair_document",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tp_employee_family",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tp_employee_license",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tp_employee_relation",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tp_employee_studi",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tp_extend",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tp_frq_it_service",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tp_frq_it_service_task",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tp_history_change_password",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tp_incoming_letter",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tp_mutasi",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tp_notification_topic",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tp_notification_traffic",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tp_outgoing_letter",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tp_reimbursment",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tp_request",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tp_role_menu",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tp_termination",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tp_upload_file_name",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tp_user_loc_id",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tp_user_role",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "hrdagro",
+   "UncountableWords": null,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDateOnlyTimeOnly": true,
+   "UseDbContextSplitting": false,
+   "UseDecimalDataAnnotationForSprocResult": true,
+   "UseFluentApiOnly": false,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": true,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UsePrefixNavigationNaming": false,
+   "UseSchemaFolders": false,
+   "UseSchemaNamespaces": false,
+   "UseSpatial": false,
+   "UseT4": false
+}
