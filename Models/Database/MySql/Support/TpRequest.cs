@@ -15,7 +15,7 @@ public partial class TpRequest
 {
     [Key]
     [Column("request_id")]
-    [StringLength(5)]
+    [StringLength(100)]
     public string RequestId { get; set; }
 
     [Required]
@@ -24,7 +24,7 @@ public partial class TpRequest
     public string EmployeeId { get; set; }
 
     [Column("request_date")]
-    public DateOnly RequestDate { get; set; }
+    public DateTime RequestDate { get; set; }
 
     [Required]
     [Column("time_start")]
@@ -33,8 +33,7 @@ public partial class TpRequest
 
     [Required]
     [Column("time_end")]
-    [StringLength(20)]
-    public string TimeEnd { get; set; }
+    public TimeSpan TimeEnd { get; set; }
 
     [Required]
     [Column("total_overtime")]
@@ -67,4 +66,30 @@ public partial class TpRequest
     [Column("noted")]
     [StringLength(150)]
     public string Noted { get; set; }
+
+    //Penambahan 
+    [Column("created_at")]
+    public DateTime CreatedAt { get; set; }
+
+    [Column("created_by")]
+    [StringLength(21)]
+    public string CreatedBy { get; set; }
+
+    [Column("is_notify")]
+    public int IsNotify { get; set; }
+
+    [Column("updated_by")]
+    [StringLength(21)]
+    public string UpdatedBy { get; set; }
+
+    [Column("updated_at", TypeName = "datetime")]
+    public DateTime? UpdatedAt { get; set; }
+
+    [Column("deleted_at", TypeName = "datetime")]
+    public DateTime? DeletedAt { get; set; }
+
+    [Column("deleted_by")]
+    [StringLength(21)]
+    public string DeletedBy { get; set; }
+    //
 }

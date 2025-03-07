@@ -119,7 +119,7 @@ namespace BackendHrdAgro.Models.Master
         //    return list;
         //}
 
-        /*public List<FindSessionDataQuery> FindSessionDataByEmployeeId(string employeeId)
+        public List<FindSessionDataQuery> FindSessionDataByEmployeeId(string employeeId)
         {
 
             string sql = $"select  a.user_id,b.employee_id, a.user_full_name, b.department_id,b.title_id,b.level_id,c.div_id, c.department_name " +
@@ -130,20 +130,20 @@ namespace BackendHrdAgro.Models.Master
             var list = new DatabaseContext().FindSessionDataQueries.FromSqlRaw(sql).ToList();
             return list;
         }
-        public List<FindEmployeeIdByNumberWA> FindEmployeeIdByNumberWA(string phoneNumber)
+        /*public List<FindEmployeeIdByNumberWA> FindEmployeeIdByNumberWA(string phoneNumber)
         {
 
             string sql = $"SELECT employee_id, user_id FROM tm_users where phone = '{phoneNumber}' ";
             var list = new DatabaseContext().FindEmployeeIdByNumberWA.FromSqlRaw(sql).ToList();
             return list;
         }*/
-        /*public List<FindRequestData> FindRequestData(string table,string fildName, string requestId)
+        public List<FindRequestData> FindRequestData(string table, string fildName, string requestId)
         {
 
             string sql = $"SELECT employee_id FROM {table} where {fildName} = '{requestId}' ";
             var list = new DatabaseContext().FindRequestDatas.FromSqlRaw(sql).ToList();
             return list;
-        }*/
+        }
         //public int CountUserByWA(string WhatsappNumber) => new DatabaseContext().TmUsers.Where(x => x.Phone.Equals(WhatsappNumber)).Count();
 
 

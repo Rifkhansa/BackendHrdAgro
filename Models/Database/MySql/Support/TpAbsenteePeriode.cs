@@ -8,13 +8,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BackendHrdAgro.Models;
 
-[Keyless]
 [Table("tp_absentee_periode")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
 public partial class TpAbsenteePeriode
 {
-    [Required]
+    [Key]
     [Column("periode_id")]
     [StringLength(21)]
     public string PeriodeId { get; set; }
@@ -49,5 +48,5 @@ public partial class TpAbsenteePeriode
     [Required]
     [Column("user_etr_closing")]
     [StringLength(21)]
-    public string UserEtrClosing { get; set; }
+    public string? UserEtrClosing { get; set; }
 }

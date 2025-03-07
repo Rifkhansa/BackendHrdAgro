@@ -6,29 +6,22 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace BackendHrdAgro.Models;
+namespace BackendHrdAgro.Models.Database.MySql;
 
-[Keyless]
-[Table("tp_detail_cuti")]
+[Table("tm_permission_type")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public partial class TpDetailCuti
+public partial class TmPermissionType
 {
-    [Required]
-    [Column("id_detail_cuti")]
-    [StringLength(21)]
-    public string IdDetailCuti { get; set; }
+    [Key]
+    [Column("permission_type_id")]
+    [StringLength(10)]
+    public string PermissionTypeId { get; set; }
 
     [Required]
-    [Column("cuti_id")]
+    [Column("permission_type")]
     [StringLength(21)]
-    public string CutiId { get; set; }
-
-    [Column("cuti_date")]
-    public DateTime CutiDate { get; set; }
-
-    [Column("qty")]
-    public float Qty { get; set; }
+    public string PermissionType { get; set; }
 
     [Column("status")]
     public int Status { get; set; }

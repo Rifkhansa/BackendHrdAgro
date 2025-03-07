@@ -8,19 +8,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BackendHrdAgro.Models;
 
-[Keyless]
 [Table("tp_incoming_letter")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
 public partial class TpIncomingLetter
 {
-    [Required]
+    [Key]
     [Column("letter_id")]
     [StringLength(21)]
     public string LetterId { get; set; }
 
     [Column("letter_date")]
-    public DateOnly LetterDate { get; set; }
+    public DateTime LetterDate { get; set; }
 
     [Required]
     [Column("sender")]
@@ -42,7 +41,7 @@ public partial class TpIncomingLetter
 
     [Required]
     [Column("status")]
-    public bool? Status { get; set; }
+    public int Status { get; set; }
 
     [Column("receipt_id")]
     [StringLength(21)]

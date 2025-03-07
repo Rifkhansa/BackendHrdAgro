@@ -38,31 +38,30 @@ namespace BackendHrdAgro.Models.Master
         {
             var reset = new DatabaseContext().EmailDbs.FromSqlRaw($"select email as email_database from tm_users where employee_id = {value.employeeId}").ToList();
             return reset;
-        }
-        public List<employeeDepart> employeeDeparts (IndexChangePassword value)
+        }*/
+        public List<employeeDepart> employeeDeparts(IndexChangePassword value)
         {
             var query = new DatabaseContext().EmployeeDeparts.FromSqlRaw("select employee_first_name,employee_last_name,department_name\r\n      from tm_employee_affair a\r\n      " +
                 $"inner join tm_department b on a.department_id=b.department_id\r\n      where employee_id = {value.employeeId}").ToList();
             return query;
         }
-        public List<password> password (ChangePassword value)
+        public List<password> password(ChangePass value)
         {
             var qPassword = new DatabaseContext().Passwords.FromSqlRaw($"select password  from tm_users a where employee_id = '{value.EmployeeId}'").ToList();
             return qPassword;
         }
-        public List<TotalChangePass> TotalChange (ChangePassword value)
+        public List<TotalChangePass> TotalChange(ChangePass value)
         {
             var queryTotal = new DatabaseContext().TotalChangePasses.FromSqlRaw($"select count(employee_id) as jumlah_change_password from tp_history_change_password where employee_id = {value.EmployeeId}").ToList();
             return queryTotal;
         }
-        public List<historyId> historyIds (ChangePassword value)
+        public List<historyId> historyIds(ChangePass value)
         {
             var id = new DatabaseContext().HistoryIds.FromSqlRaw("select id_history_password as id_terlama from tp_history_change_password " +
                 $"where employee_id = {value.EmployeeId} order by date_change_password asc limit 1").ToList();
             return id;
-        } */
+        }
 
-        
         //End
     }
 
@@ -106,7 +105,7 @@ namespace BackendHrdAgro.Models.Master
         [Required]
         public string employeeId { get; set; }
     }
-    public class ChangePassword
+    public class ChangePass
     {
         public string EmployeeId { get; set; }
         public string CurrentPassword { get; set; }
@@ -226,7 +225,6 @@ namespace BackendHrdAgro.Models.Master
     }
 
 
-    /** fauzan **/
     [Keyless]
     public class FindSessionDataQuery
     {
@@ -251,11 +249,8 @@ namespace BackendHrdAgro.Models.Master
 
         [Column("level_id")]
         public string LevelId { get; set; }
-
-
     }
 
-    /** samsoul **/
     [Keyless]
     public class FindEmployeeIdByNumberWA
     {
@@ -274,7 +269,6 @@ namespace BackendHrdAgro.Models.Master
         public string EmployeeId { get; set; }
 
     }
-    /** fauzan **/
 
 
 }
