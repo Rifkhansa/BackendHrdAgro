@@ -24,10 +24,10 @@ public partial class TmHolidayDate
     public string HolidayName { get; set; }
 
     [Column("holiday_date")]
-    public DateOnly HolidayDate { get; set; }
+    public DateTime HolidayDate { get; set; }
 
     [Column("status")]
-    public bool Status { get; set; }
+    public int Status { get; set; }
 
     [Column("dt_etr", TypeName = "datetime")]
     public DateTime DtEtr { get; set; }

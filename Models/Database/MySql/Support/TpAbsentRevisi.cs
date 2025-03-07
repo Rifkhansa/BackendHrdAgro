@@ -6,21 +6,20 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace BackendHrdAgro.Models;
+namespace BackendHrdAgro.Models.Database.MySql.Support;
 
-[Keyless]
 [Table("tp_absent_revisi")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
 public partial class TpAbsentRevisi
 {
-    [Required]
+    [Key]
     [Column("employee_id")]
     [StringLength(21)]
     public string EmployeeId { get; set; }
 
     [Column("absent_date")]
-    public DateOnly AbsentDate { get; set; }
+    public DateTime AbsentDate { get; set; }
 
     [Required]
     [Column("category")]
@@ -55,17 +54,36 @@ public partial class TpAbsentRevisi
     [Column("size")]
     public int Size { get; set; }
 
-    [Required]
     [Column("approve_by")]
     [StringLength(21)]
     public string ApproveBy { get; set; }
 
     [Column("approve_date")]
-    public DateOnly ApproveDate { get; set; }
+    public DateTime ApproveDate { get; set; }
+
+    [Column("approve_reason")]
+    [StringLength(200)]
+    public string ApproveReason { get; set; }
 
     /// <summary>
     /// 1=ready entry, -1 =reject; 5=adknowledge; 9=clear;
     /// </summary>
     [Column("status")]
-    public bool Status { get; set; }
+    public int Status { get; set; }
+
+    [Required]
+    [Column("created_by")]
+    [StringLength(21)]
+    public string CreatedBy { get; set; }
+
+    [Column("created_at")]
+    public DateTime CreatedAt { get; set; }
+
+    [Column("updated_by")]
+    [StringLength(21)]
+    public string UpdatedBy { get; set; }
+
+    [Column("updated_at")]
+    public DateTime UpdatedAt { get; set; }
+
 }

@@ -21,7 +21,7 @@ namespace BackendHrdAgro.Models.Employee
             return extendLast;
         }
 
-        public  List<Reminders> reminders()
+        public  List<RemindersExtend> reminders()
         {
             var sql = "select a.*,department_name ,title_name,bank_name,religi_name,\r\n        " +
                 "level_name,employee_status_name,married_name,DATE_FORMAT(a.tanggal_lahir, '%d %M %Y') as tanggal_lahir_view,\r\n        " +
@@ -32,7 +32,7 @@ namespace BackendHrdAgro.Models.Employee
                 "left outer join tm_religi f on a.religi_id=f.religi_id\r\n        left outer join tm_married g on a.married_id=g.married_id\r\n        " +
                 "left outer join tm_bank h on a.bank_id=h.bank_id\r\n        where DATE_FORMAT(end_of_contract,'%Y-%m-%d') >= DATE_FORMAT(now(),'%Y-%m-%d')\r\n        " +
                 "and  DATE_FORMAT(DATE_ADD(end_of_contract, INTERVAL -2 MONTH),'%Y-%m-%d')<= DATE_FORMAT(now(),'%Y-%m-%d')   order by employee_first_name ASC";
-            var reminder = new DatabaseContext().Reminders.FromSqlRaw(sql).ToList();
+            var reminder = new DatabaseContext().RemindersExtends.FromSqlRaw(sql).ToList();
             return reminder;
         }
 
@@ -210,7 +210,7 @@ namespace BackendHrdAgro.Models.Employee
     }
 
     [Keyless]
-    public class Reminders
+    public class RemindersExtend
     {
         [Column("employee_id")]
         public string EmployeeId { get; set; }

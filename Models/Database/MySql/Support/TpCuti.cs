@@ -34,7 +34,7 @@ public partial class TpCuti
     public string TypeCutiId { get; set; }
 
     [Column("request_date")]
-    public DateOnly RequestDate { get; set; }
+    public DateTime RequestDate { get; set; }
 
     [Column("jumlah_cuti")]
     public float JumlahCuti { get; set; }
@@ -51,7 +51,7 @@ public partial class TpCuti
     public string ApproveBy { get; set; }
 
     [Column("approve_date")]
-    public DateOnly ApproveDate { get; set; }
+    public DateTime ApproveDate { get; set; }
 
     [Required]
     [Column("noted")]
@@ -61,4 +61,26 @@ public partial class TpCuti
     //penambahan 
     [Column("deleted_at", TypeName = "datetime")]
     public DateTime? DeletedAt { get; set; }
+
+    [Column("is_notify")]
+    public int IsNotify { get; set; }
+
+    [Column("updated_by")]
+    [StringLength(21)]
+    public string? UpdatedBy { get; set; }
+
+    [Column("updated_at", TypeName = "datetime")]
+    public DateTime? UpdatedAt { get; set; }
+
+    [Column("deleted_by")]
+    [StringLength(21)]
+    public string? DeletedBy { get; set; }
+
+    [Required]
+    [Column("created_by")]
+    [StringLength(21)]
+    public string CreatedBy { get; set; }
+
+    [Column("created_at", TypeName = "datetime")]
+    public DateTime CreatedAt { get; set; }
 }

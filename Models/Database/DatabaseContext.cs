@@ -4,13 +4,18 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection.Metadata;
+using BackendHrdAgro.Models.Attendance;
 using BackendHrdAgro.Models.Database.MySql.Master;
 using BackendHrdAgro.Models.Database.MySql.Support;
+using BackendHrdAgro.Models.Database.MySql.View;
 using BackendHrdAgro.Models.Employee;
+using BackendHrdAgro.Models.Layout;
 using BackendHrdAgro.Models.Master;
+using BackendHrdAgro.Models.Permission;
 using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore.MySql.Scaffolding.Internal;
+using Reminders = BackendHrdAgro.Models.Attendance.Reminders;
 
 namespace BackendHrdAgro.Models.Database.MySql;
 
@@ -204,6 +209,13 @@ public partial class DatabaseContext : DbContext
 
     public virtual DbSet<TpUserRole> TpUserRoles { get; set; }
 
+    public virtual DbSet<TpAbsentNoCard> TpAbsentNoCards { get; set; }
+
+    public virtual DbSet<TmBloodType> TmBloodTypes { get; set; }
+    public virtual DbSet<TmPermissionType> TmPermissionTypes { get; set; }
+    public virtual DbSet<TpPermission> TpPermissions { get; set; }
+    public virtual DbSet<TpPermissionDetail> TpPermissionDetails { get; set; }
+
     //Penambahan 
     public virtual DbSet<GetLatestId> GetLatestIds { get; set; } = null!;
     public virtual DbSet<FindSessionDataQuery> FindSessionDataQueries { get; set; } = null!;
@@ -236,8 +248,50 @@ public partial class DatabaseContext : DbContext
     public virtual DbSet<TerminationGroupQuery> TerminationGroupQueries { get; set; } = null!;
     public virtual DbSet<ExtendGroupQuery> ExtendGroupQueries { get; set; } = null!;
     public virtual DbSet<ExtendLastGroupQuery> ExtendLastGroupQueries { get; set; } = null!;
+    public virtual DbSet<RemindersExtend> RemindersExtends { get; set; } = null!;
     public virtual DbSet<Reminders> Reminders { get; set; } = null!;
     public virtual DbSet<MutationGroup> MutationGroups { get; set; } = null!;
+    public virtual DbSet<employeeDepart> EmployeeDeparts { get; set; } = null!;
+    public virtual DbSet<password> Passwords { get; set; } = null!;
+    public virtual DbSet<TotalChangePass> TotalChangePasses { get; set; } = null!;
+    public virtual DbSet<historyId> HistoryIds { get; set; } = null!;
+    public virtual DbSet<Letter> Letters { get; set; } = null!;
+    public virtual DbSet<destination> Destinations { get; set; } = null!;
+    public virtual DbSet<receiptBy> Receipts { get; set; } = null!;
+    public virtual DbSet<OutGoingLetterIndex> OutGoingLetters { get; set; } = null!;
+    public virtual DbSet<LetterForm> LetterForms { get; set; } = null!;
+    public virtual DbSet<LetterType> LetterTypes { get; set; } = null!;
+    public virtual DbSet<TitleOutgoing> TitleOutgoings { get; set; } = null!;
+    public virtual DbSet<Cob> Cobs { get; set; } = null!;
+    public virtual DbSet<Security> Securities { get; set; } = null!;
+    public virtual DbSet<Sender> Senders { get; set; } = null!;
+    public virtual DbSet<MappingId> MappingIds { get; set; } = null!;
+    public virtual DbSet<MaxIdResponse> MaxIdResponses { get; set; }
+    public virtual DbSet<LetterNumberResponse> LetterNumberResponses { get; set; }
+    public virtual DbSet<DepartmentOutgoing> DepartmentOutgoings { get; set; } = null!;
+    public virtual DbSet<FindRequestData> FindRequestDatas { get; set; } = null!;
+    //Attendance
+    public virtual DbSet<AttendanceRecordQuery> AttendanceRecordQueries { get; set; } = null!;
+    public virtual DbSet<PeriodsQuery> PeriodsQueries { get; set; } = null!; // id dan name saja
+    public virtual DbSet<HolidayGroup> HolidayGroups { get; set; } = null!;
+    public virtual DbSet<OvertimeQuery> OvertimeQueries { get; set; } = null!;
+    public virtual DbSet<FindIsOB> FindIsOBs { get; set; } = null!;
+    public virtual DbSet<PeriodeQuery> PeriodeQueries { get; set; } = null!;
+    public virtual DbSet<PeriodeCreateQuery> PeriodeCreateQueries { get; set; } = null!;
+    public virtual DbSet<AttendanceEmployeeQuery> AttendanceEmployeeQueries { get; set; } = null!;
+    public virtual DbSet<UnAbsenteeEmployeeQuery> UnAbsenteeEmployeeQueries { get; set; } = null!;
+    public virtual DbSet<ComeLateQuery> ComeLateQueries { get; set; } = null!;
+    public virtual DbSet<ComeLateSumQuery> ComeLateSumQueries { get; set; } = null!;
+    public virtual DbSet<UnAbsenteeDepartmentQuery> UnAbsenteeDepartmentQueries { get; set; } = null!;
+    public virtual DbSet<NoCardQuery> NoCardQueries { get; set; } = null!;
+    public virtual DbSet<ListWAUser> ListWAUsers { get; set; } = null!;
+    public virtual DbSet<PermissionQuery> PermissionQueries { get; set; } = null!;
+    public virtual DbSet<PermissionDetailQuery> PermissionDetailQueries { get; set; } = null!;
+    public virtual DbSet<LeaveQuery> LeaveQueries { get; set; } = null!;
+    public virtual DbSet<LeaveDetailQuery> LeaveDetailQueries { get; set; } = null!;
+    public virtual DbSet<TotalLeave> TotalLeaves { get; set; } = null!;
+    //
+
     //END
 
     //dashboard index

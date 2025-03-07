@@ -19,7 +19,7 @@ public partial class TpOutgoingLetter
     public string LetterId { get; set; }
 
     [Column("letter_date")]
-    public DateOnly LetterDate { get; set; }
+    public DateTime LetterDate { get; set; }
 
     [Required]
     [Column("letter_form_id")]
@@ -91,7 +91,7 @@ public partial class TpOutgoingLetter
     public string FileName { get; set; }
 
     [Column("size")]
-    public int? Size { get; set; }
+    public long? Size { get; set; }
 
     [Column("type")]
     [StringLength(20)]
@@ -99,7 +99,7 @@ public partial class TpOutgoingLetter
 
     [Required]
     [Column("status")]
-    public bool? Status { get; set; }
+    public int? Status { get; set; }
 
     /// <summary>
     /// pengantar
@@ -113,7 +113,7 @@ public partial class TpOutgoingLetter
     public string ReceiptBy { get; set; }
 
     [Column("receipt_dt")]
-    public DateOnly? ReceiptDt { get; set; }
+    public DateTime? ReceiptDt { get; set; }
 
     [Column("is_accepted")]
     public sbyte IsAccepted { get; set; }

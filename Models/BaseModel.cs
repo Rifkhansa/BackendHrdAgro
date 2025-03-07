@@ -208,7 +208,7 @@ namespace BackendHrdAgro.Models
         }
 
 
-       /* public string GenerateLetterNumber(string additionalString = "", string additionalCriteria = "", string typeLetterForm = "")
+        public string GenerateLetterNumber(string additionalString = "", string additionalCriteria = "", string typeLetterForm = "")
         {
             using (var context = new DatabaseContext())
             {
@@ -252,7 +252,7 @@ namespace BackendHrdAgro.Models
                 return id;
             }
         }
-*/
+
         public static string GenerateId(string tableName, string primaryKey, string str, int trailing, string lastKey, string date)
         {
             if (lastKey == "NONE")
