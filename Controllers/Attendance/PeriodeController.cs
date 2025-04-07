@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BackendHrdAgro.Controllers.Attendance
 {
+    [Route("api/absentee")]
+    [ApiController]
     public class PeriodeController : Controller
     {
         private readonly IWebHostEnvironment _env;

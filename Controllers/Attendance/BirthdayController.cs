@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BackendHrdAgro.Controllers.Attendance
 {
+    [Route("api/birthday")]
+    [ApiController]
     public class BirthdayController : Controller
     {
         private readonly IWebHostEnvironment _env;

@@ -215,6 +215,7 @@ public partial class DatabaseContext : DbContext
     public virtual DbSet<TmPermissionType> TmPermissionTypes { get; set; }
     public virtual DbSet<TpPermission> TpPermissions { get; set; }
     public virtual DbSet<TpPermissionDetail> TpPermissionDetails { get; set; }
+    public virtual DbSet<TpWarningLetter> TpWarnings { get; set; }
 
     //Penambahan 
     public virtual DbSet<GetLatestId> GetLatestIds { get; set; } = null!;
@@ -270,7 +271,6 @@ public partial class DatabaseContext : DbContext
     public virtual DbSet<LetterNumberResponse> LetterNumberResponses { get; set; }
     public virtual DbSet<DepartmentOutgoing> DepartmentOutgoings { get; set; } = null!;
     public virtual DbSet<FindRequestData> FindRequestDatas { get; set; } = null!;
-    //Attendance
     public virtual DbSet<AttendanceRecordQuery> AttendanceRecordQueries { get; set; } = null!;
     public virtual DbSet<PeriodsQuery> PeriodsQueries { get; set; } = null!; // id dan name saja
     public virtual DbSet<HolidayGroup> HolidayGroups { get; set; } = null!;
@@ -290,7 +290,8 @@ public partial class DatabaseContext : DbContext
     public virtual DbSet<LeaveQuery> LeaveQueries { get; set; } = null!;
     public virtual DbSet<LeaveDetailQuery> LeaveDetailQueries { get; set; } = null!;
     public virtual DbSet<TotalLeave> TotalLeaves { get; set; } = null!;
-    //
+    public virtual DbSet<WarningLetterGroupQuery> WarningLetterGroupQueries { get; set; } = null!;
+    public virtual DbSet<Users> Users { get; set; } = null!;
 
     //END
 
