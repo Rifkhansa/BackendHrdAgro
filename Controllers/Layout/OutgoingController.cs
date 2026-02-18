@@ -40,7 +40,7 @@ namespace BackendHrdAgro.Controllers.Layout
         public IActionResult Index(string id = "USR-201710052")
         {
             var kriteria = "";
-            string[] arrayTitle = { "DS002", "DS003" };
+           // string[] arrayTitle = { "DS002", "DS003" };
 
             try
             {
@@ -48,7 +48,7 @@ namespace BackendHrdAgro.Controllers.Layout
                 string employeeId = findSessionData[0].EmployeeId;
                 string departmentId = findSessionData[0].DepartmentId;
 
-                if (departmentId == "DP006" || employeeId == "0808003") // untuk hrd
+                if (departmentId == "DP003" || departmentId == "DP004" || employeeId == "0808003") // untuk hrd
                 {
                     kriteria = "";
                 }

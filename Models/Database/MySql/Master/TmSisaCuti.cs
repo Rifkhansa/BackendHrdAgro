@@ -34,7 +34,10 @@ public partial class TmSisaCuti
     public float SisaCutiMaternity { get; set; }
 
     [Column("sisa_cuti_long")]
-    public float SisaCutiLong { get; set; }
+    public float SisaCutiLong {  get; set; } 
+
+    [Column("sisa_cuti_replacement")]
+    public float SisaCutiReplacement { get; set; }
 
     [Required]
     [Column("status_cuti")]

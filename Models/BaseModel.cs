@@ -214,9 +214,7 @@ namespace BackendHrdAgro.Models
             {
                 var currentDate = DateTime.Now.Year.ToString();
 
-                var types = new List<string> { "OFR", "PLC", "QTS", "SKEP", "TWIMC", "PK", "INV", "P.INV", "SP.1", "SP.2", "SP.3",
-                                       "SK", "BAP.K", "STJ", "SKU", "SPER", "SKET", "BA", "STB", "TAX", "SPN", "TENDER-",
-                                       "CLM", "EFQ", "PLS", "CARD", "CLM-ASPR", "CLM-AJK", "SKEP", "TWIMC", "PK" };
+                var types = new List<string> { "PO", "QL", "SKEP", "TWIMC", "PK"};
 
                 string criteria;
                 if (types.Contains(typeLetterForm))
@@ -228,9 +226,9 @@ namespace BackendHrdAgro.Models
                     criteria = $"AND mapping_id NOT IN ('{string.Join("', '", types)}')";
                 }
 
-                int noOfTrailing = 6;
+                int noOfTrailing = 4;
                 string prefix = $"LET{currentDate}";
-                string query = $"SELECT MAX(letter_number) as max_id FROM tp_outgoing_letter WHERE LEFT(letter_id, {prefix.Length}) = '{prefix}' {criteria}";
+                string query = $"SELECT MAX(letter_number) as max_id FROM tp_outgoing_letter WHERE LEFT(letter_id, {prefix.Length}) = '{prefix}' AND status = 1 {criteria}";
                 Console.WriteLine("MyQuery = " + query);
 
                 var maxResult = context.MaxIdResponses.FromSqlRaw(query).SingleOrDefault();

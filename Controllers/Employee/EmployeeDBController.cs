@@ -37,7 +37,7 @@ namespace BackendHrdAgro.Controllers.Employee
         EmployeeDbModel employeeDbModel = new EmployeeDbModel();
 
         [HttpPost("{id}")]
-        public IActionResult Index(string id = "USR-201710052")
+        public IActionResult Index(string id = "USR-201709001")
         {
             try
             {
@@ -88,6 +88,7 @@ namespace BackendHrdAgro.Controllers.Employee
                 }
 
                 var group = employeeDbModel.employeeGroupQueries(kriteria);
+                Console.WriteLine("group" + group);
                 var department = employeeDbModel.departments();
                 var type = employeeDbModel.types();
                 var religi = employeeDbModel.religions();
@@ -97,7 +98,8 @@ namespace BackendHrdAgro.Controllers.Employee
                 var level = employeeDbModel.levels();
                 var employeeStatus = employeeDbModel.employeeStatuses();
                 var bankStatus = employeeDbModel.bankStatuses();
-                var reasonStatus = employeeDbModel.reasonStatuses();
+                var statusTermination = employeeDbModel.reasonStatuses();
+                var bloodTypes = employeeDbModel.bloodTypes();
 
                 Responses.Add("code", ErrorCode.Ok);
                 Responses.Add("message", ErrorMessege.Ok);
@@ -113,7 +115,8 @@ namespace BackendHrdAgro.Controllers.Employee
                 Detail.Add("level", level);
                 Detail.Add("employeeStatus", employeeStatus);
                 Detail.Add("bankStatus", bankStatus);
-                Detail.Add("reasonStatus", reasonStatus);
+                Detail.Add("bloodTypes", bloodTypes);
+                Detail.Add("statusTermination", statusTermination);
 
                 ListData.Add(Detail);
 

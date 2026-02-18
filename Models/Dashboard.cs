@@ -97,10 +97,10 @@ namespace BackendHrdAgro.Models
                 var today = DateTime.Now.ToString("yyyy/MM/dd");
                 var myCriteria = "";
 
-                var arrayAsmen = new[] { "0615041", "0913021" };
+                var arrayAsmen = new[] { "010116", "0913021" };
                 if (titleId == "DS002" || arrayAsmen.Contains(employeeId)) // manager
                 {
-                    if (departmentId == "DP006" || employeeId == "0808003") // hrd
+                    if (employeeId == "0808003" || departmentId == "DP004") // hrd, BOD
                     {
                         myCriteria = "";
                     }
@@ -115,7 +115,7 @@ namespace BackendHrdAgro.Models
                 }
                 else
                 {
-                    if (departmentId == "DP006" && titleId == "DS003")
+                    if (departmentId == "DP003")
                     {
                         myCriteria = "";
                     }
@@ -213,6 +213,12 @@ namespace BackendHrdAgro.Models
         public float GetJumlahCutiLong(string employeeId)
         {
             return new DatabaseContext().TmSisaCutis.Where(c => c.EmployeeId == employeeId).Select(c => c.SisaCutiLong).FirstOrDefault();
+
+        }
+
+        public float GetJumlahCutiReplacement(string employeeId)
+        {
+            return new DatabaseContext().TmSisaCutis.Where(c => c.EmployeeId == employeeId).Select(c => c.SisaCutiReplacement).FirstOrDefault();
 
         }
         public float GetJumlahCutiAnnual(string employeeId)

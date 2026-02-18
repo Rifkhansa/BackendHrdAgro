@@ -8,13 +8,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BackendHrdAgro.Models;
 
-[Keyless]
 [Table("tp_detail_cuti")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
 public partial class TpDetailCuti
 {
-    [Required]
+    [Key]
     [Column("id_detail_cuti")]
     [StringLength(21)]
     public string IdDetailCuti { get; set; }

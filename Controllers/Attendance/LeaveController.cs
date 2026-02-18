@@ -5,6 +5,7 @@ using BackendHrdAgro.Models;
 using Microsoft.AspNetCore.Mvc;
 using BackendHrdAgro.Models.Employee;
 using Newtonsoft.Json;
+using BackendHrdAgro.Models.Database.MySql;
 
 namespace BackendHrdAgro.Controllers.Attendance
 {
@@ -31,10 +32,11 @@ namespace BackendHrdAgro.Controllers.Attendance
         Dictionary<string, dynamic> resp = new Dictionary<string, dynamic>();
         List<dynamic> listResp = new List<dynamic>();
         List<dynamic> listData = new List<dynamic>();
+        DatabaseContext databaseContext = new DatabaseContext();
 
 
         [HttpPost("{id}/leave")]
-        public IActionResult leave(string id = "USR-201710052")
+        public IActionResult leave(string id = "USR-201709001")
         {
             var clausa = "";
 
@@ -49,37 +51,17 @@ namespace BackendHrdAgro.Controllers.Attendance
                 string divId = findSessionData[0].DivId;
                 string levelId = findSessionData[0].LevelId;
 
-                if (departmentId == "DP006" || employeeId == "0808003" || employeeId == "0000000")
-                { //untuk hrd dan admin
-                    if (titleId == "DS006")
-                    {
-                        clausa = $" and a.employee_id='{employeeId}'";
-                    }
-                    else
-                    {
-                        clausa = " ";
-                    }
+                // ================= FULL ACCESS =================
+                if (departmentId == "DP003"
+                 || departmentId == "DP004" || employeeId == "070516")
+                {
+                    clausa = "";
                 }
+
+                // ================= USER LAIN =================
                 else
                 {
-                    bool tittleExist = Array.Exists(arrTittleId, element => element == titleId);
-
-                    if (tittleExist == true && levelId == "TL019")
-                    {
-                        clausa = $" and h.div_id='{divId}'";
-                    }
-                    else if (tittleExist == true)
-                    {
-                        clausa = $" and b.department_id='{departmentId}'";
-                    }
-                    else
-                    {
-                        clausa = $" and a.employee_id='{employeeId}'";
-                    }
-                }
-                if (employeeId == "0711011" || employeeId == "0913021") //stefi pak yohanes
-                {
-                    clausa = $" and b.department_id='{departmentId}'";
+                    clausa = $" and a.employee_id='{employeeId}'";
                 }
 
                 List<LeaveQuery> leave = leaveDB.ListLeave(clausa);
@@ -115,7 +97,7 @@ namespace BackendHrdAgro.Controllers.Attendance
                     }
 
                     //Link Modal App
-                    if (departmentId == "DP006" || titleId == "DS002" || employeeId == "0913021" || employeeId == "0711011") //HRD, manager, pak Yo, stepi
+                    if (departmentId == "DP003" || titleId == "DS002" || departmentId == "DP004") //HRD, BOD
                     {
                         if (k.Status == 0)
                         {
@@ -144,24 +126,68 @@ namespace BackendHrdAgro.Controllers.Attendance
                     k.LinkLeaveApp = LinkLeaveApp;
                 }
 
-                float longRemaining = 0;
+                float ReplacementRemaining = 0;
+                float AnnualRemaining = 0;
+                float LongRemaining = 0;
 
-                List<TmSisaCuti> LeaveRemaining = leaveDB.LeaveRemaining(employeeId);
-                LeaveRemaining.ForEach(x =>
+                var leaveRemaining = leaveDB.LeaveRemaining(employeeId).FirstOrDefault();
+
+                if (leaveRemaining != null)
                 {
-                    longRemaining = x.SisaCutiLong;
-                });
+                    ReplacementRemaining = leaveRemaining.SisaCutiReplacement;
+                    AnnualRemaining = leaveRemaining.SisaCutiAnnual;
+                    LongRemaining = leaveRemaining.SisaCutiLong;
+                }
 
-                List<TmTypeCuti> leaveTypes;
+                List<TmTypeCuti> leaveTypes = new();
 
-                if (longRemaining > 0.75)
-                {
+                // ambil cuti utama sesuai prioritas
+                if (ReplacementRemaining > 0)
+                    leaveTypes = leaveDB.LeaveTypeFindOnlyReplacement();
+                else if (AnnualRemaining > 0)
+                    leaveTypes = leaveDB.LeaveTypeFindOnlyAnnual();
+                else if (LongRemaining > 0)
                     leaveTypes = leaveDB.LeaveTypeFindOnlyLong();
-                }
-                else
+
+                // kalau ada cuti utama → tambahkan cuti lain
+                if (leaveTypes.Any())
                 {
-                    leaveTypes = leaveDB.LeaveTypeFind();
+                    // ambil ID cuti utama yang sedang aktif
+                    var activeTypeIds = leaveTypes.Select(x => x.TypeCutiId).ToList();
+
+                    var otherTypes = databaseContext.TmTypeCutis
+                        .Where(x => x.Status == 1
+                            // jangan ambil cuti utama lain
+                            && !new[] { "CUT001", "CUT003", "CUT004", "CUT005", "CUT006", "CUT007", "CUT008" }
+                                .Contains(x.TypeCutiId)
+                        )
+                        .ToList();
+
+                    leaveTypes.AddRange(otherTypes);
+
+                    // anti duplikat
+                    leaveTypes = leaveTypes
+                        .GroupBy(x => x.TypeCutiId)
+                        .Select(x => x.First())
+                        .ToList();
                 }
+
+                //List<TmSisaCuti> LeaveRemaining = leaveDB.LeaveRemaining(employeeId);
+                //LeaveRemaining.ForEach(x =>
+                //{
+                //    longRemaining = x.SisaCutiLong;
+                //});
+
+                //List<TmTypeCuti> leaveTypes;
+
+                //if (longRemaining > 0.75)
+                //{
+                //    leaveTypes = leaveDB.LeaveTypeFindOnlyLong();
+                //}
+                //else
+                //{
+                //    leaveTypes = leaveDB.LeaveTypeFind();
+                //}
 
                 resp.Add("code", errorCodes.Ok);
                 resp.Add("message", errorMessege.Ok);
@@ -170,7 +196,7 @@ namespace BackendHrdAgro.Controllers.Attendance
                 detail.Add("Leaves", leave);
                 detail.Add("leaveTypes", leaveTypes);
                 detail.Add("leaveRemaining", leaveDB.LeaveRemaining(employeeId));
-                detail.Add("totalLeave", leaveDB.TotalLeave(departmentId));
+                detail.Add("totalLeave", leaveDB.TotalLeave(departmentId,employeeId));
                 listData.Add(detail);
 
 
@@ -269,7 +295,7 @@ namespace BackendHrdAgro.Controllers.Attendance
             }
 
             List<Dictionary<string, dynamic>> create = leaveDB.CreateLeave(createLeave, createLeave.CutiId, leaveTypeDay, insertDetailDate);
-          
+
             bool myResult = create[0]["result"];
             var myMessage = create[0]["message"];
 
@@ -375,80 +401,28 @@ namespace BackendHrdAgro.Controllers.Attendance
             }*/
             //
 
-            //access of approvall
-            var findSessionData = userDB.FindSessionDataUser(uId);
+            // ================= ACCESS OF APPROVAL =================
+            var findSessionData = userDB.FindSessionDataUser(uId); // Approver
             var findRequestData = userDB.FindRequestData("tp_cuti", "cuti_id", value.CutiId);
-            Console.WriteLine("emplId = " + findRequestData[0].EmployeeId);
             var findSessionDataStaff = userDB.FindSessionDataByEmployeeId(findRequestData[0].EmployeeId);
-            Console.WriteLine("usr = " + findSessionData[0].DepartmentId);
-            Console.WriteLine("staff = " + findSessionDataStaff[0].DepartmentId);
 
-            Console.WriteLine("cek: " + EmployeeFactory.IsHeadDepartment(employeeId: findSessionData[0].EmployeeId));
-            if (findSessionData[0].DepartmentId != "DP006")
+            var approverId = findSessionData[0].EmployeeId;
+            var approverDept = findSessionData[0].DepartmentId;
+            var staffId = findSessionDataStaff[0].EmployeeId;
+            var staffDept = findSessionDataStaff[0].DepartmentId;
+
+            // SUPER ADMIN → BEBAS
+            if (approverDept == "DP003" || approverDept == "DP004" || approverId == "070516")
             {
-                if (findSessionData[0].EmployeeId != "0808003")
-                {
-                    if (EmployeeFactory.IsHeadDepartment(employeeId: findSessionDataStaff[0].EmployeeId))
-                    {
-                        var headDiv = EmployeeFactory.GetHeadDivision(divisionId: findSessionDataStaff[0].DivId);
-                        if (findSessionDataStaff[0].EmployeeId != "0321080" && findSessionDataStaff[0].EmployeeId != "0808004")
-                        {
-                            if (findSessionData[0].EmployeeId != headDiv)
-                            {
-                                return BadRequest(new { message = "Anda tidak diizinkan untuk melakukan approvals.", success = 0 });
-                            }
-                        }
-                        else
-                        {
-                            if (findSessionData[0].EmployeeId != "0808003")
-                            {
-                                return BadRequest(new { message = "Anda tidak diizinkan untuk melakukan approvalo.", success = 0 });
-                            }
-                        }
-                    }
-                    else
-                    {
-                        var headDiv = EmployeeFactory.GetHeadDivision(divisionId: findSessionDataStaff[0].DivId);
-
-                        if (findSessionData[0].EmployeeId == headDiv)
-                        {
-                            Console.WriteLine("Im Head Div " + findSessionData[0].EmployeeId);
-                            // return BadRequest(new { message = "Anda tidak diizinkan untuk melakukan approvals.", success = 0 });
-                        }
-                        else
-                        {
-                            if (findSessionDataStaff[0].DepartmentId != findSessionData[0].DepartmentId)
-                            {
-                                return BadRequest(new { message = "Anda tidak diizinkan untuk melakukan approval, dikarnakan berbeda departement", success = 0 });
-                            }
-                            else
-                            {
-                                var headDept = EmployeeFactory.GetHeadDepartment(departmentId: findSessionDataStaff[0].DepartmentId);
-
-                                if (findSessionData[0].EmployeeId != headDept)
-                                {
-                                    Console.WriteLine("DPPP: " + findSessionData[0].DepartmentId);
-                                    if (findSessionData[0].DepartmentId == "DP011" || findSessionData[0].DepartmentId == "DP002")
-                                    {
-                                        if (findSessionData[0].EmployeeId != "0711011" && findSessionData[0].EmployeeId != "0913021")
-                                        {
-
-                                            return BadRequest(new { message = $"Anda tidak diizinkan untuk melakukan approval", success = 0 });
-                                        }
-                                    }
-                                    else
-                                    {
-                                        return BadRequest(new { message = $"Anda tidak diizinkan untuk melakukan approval", success = 0 });
-                                    }
-
-                                }
-                            }
-                        }
-
-                    }
-                }
+                // allow
             }
-            //end access off approvall
+            else
+            {
+
+                return BadRequest(new { message = "Anda tidak diizinkan untuk melakukan approval", success = 0 });
+
+            }
+            // ================= END ACCESS OF APPROVAL =================
 
             TpCuti approvalLeave = new TpCuti()
             {

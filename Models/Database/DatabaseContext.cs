@@ -230,6 +230,7 @@ public partial class DatabaseContext : DbContext
     public virtual DbSet<Levels> Levels { get; set; } = null!;
     public virtual DbSet<EmployeeStatus> EmployeeStatuses { get; set; } = null!;
     public virtual DbSet<BankStatus> BankStatuses { get; set; } = null!;
+    public virtual DbSet<BloodType> BloodTypes { get; set; } = null!;
     public virtual DbSet<ReasonStatus> ReasonStatuses { get; set; } = null!;
     public virtual DbSet<listFamily> ListFamilies { get; set; } = null!;
     public virtual DbSet<Relationship> Relationships { get; set; } = null!;
@@ -292,6 +293,10 @@ public partial class DatabaseContext : DbContext
     public virtual DbSet<TotalLeave> TotalLeaves { get; set; } = null!;
     public virtual DbSet<WarningLetterGroupQuery> WarningLetterGroupQueries { get; set; } = null!;
     public virtual DbSet<Users> Users { get; set; } = null!;
+    public virtual DbSet<ReplacementView> ReplacementViews { get; set; } = null!;
+    public virtual DbSet<ReplacementDetailQuery> ReplacementDetailQueries { get; set; } = null!;
+    public virtual DbSet<TpReplacementDetail> TpReplacementDetails { get; set; }
+    public virtual DbSet<TpReplacementLeave> TpReplacementLeaves { get; set; }
 
     //END
 
