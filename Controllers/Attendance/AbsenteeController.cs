@@ -50,7 +50,7 @@ namespace BackendHrdAgro.Controllers.Attendance
                 string divId = findSessionData[0].DivId;
                 string levelId = findSessionData[0].LevelId;
 
-                if (departmentId == "DP006" || employeeId == "0808003" || employeeId == "0000000")
+                if (departmentId == "DP006" || employeeId == "0808003" || employeeId == "260224" || departmentId == "DP004")
                 {  //untuk hrd
                     if (titleId == "DS006")
                     {

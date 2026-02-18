@@ -11,7 +11,7 @@ namespace BackendHrdAgro.Models.Attendance
         public List<HolidayGroup> holidayGroups()
         {
             var sql = "select a.*,case when status = 1 then 'Active' when status=0 " +
-                "then 'Non Active' end as my_status from tm_holiday_date a where status in (1,0,9) order by holiday_id ASC";
+                "then 'Non Active' end as my_status from tm_holiday_date a where status in (1,0,9) order by holiday_id DESC";
             var holiday = new DatabaseContext().HolidayGroups.FromSqlRaw(sql).ToList();
             return holiday;
         }

@@ -167,7 +167,7 @@ namespace BackendHrdAgro.Controllers
                 string divId = findSessionData[0].DivId;
                 string levelId = findSessionData[0].LevelId;
 
-                if (departmentId == "DP006" || employeeId == "0808003")
+                if (departmentId == "DP004" || employeeId == "0808003" || departmentId == "DP003")
                 { //untuk hrd
                     kriteria = "";
 
@@ -185,18 +185,14 @@ namespace BackendHrdAgro.Controllers
                 {
                     if (AuthorizationFactory.Exit(id: titleId))
                     {
-                        // detail.Add(key: "Presence", dashboardDB.GetPresence(action: RetriveAction.EmployeeId, id: employeeId));
                         detail.Add(key: "Presence", dashboardDB.GetPresence(titleId, employeeId, departmentId, levelId, divId));
                     }
                     else
                     {
-                        //  detail.Add(key: "Presence", dashboardDB.GetPresence(action: RetriveAction.All, id: string.Empty));
                         detail.Add(key: "Presence", dashboardDB.GetPresence(titleId, employeeId, departmentId, levelId, divId));
-                       // detail.Add(key: "JumlahPunishment", dashboardDB.GetJumlahPunishment());
                         detail.Add(key: "JumlahApproval", dashboardDB.GetJumlahApproval(departmentId));
                         detail.Add(key: "JumlahTermination", dashboardDB.GetJumlahTermination());
                         detail.Add(key: "JumlahApprovalCuti", dashboardDB.GetJumlahApprovalCuti(departmentId, employeeId));
-                       // detail.Add(key: "JumlahApprovalPermission", dashboardDB.GetJumlahApprovalPermission(departmentId));
                         detail.Add(key: "JumlahExtend", dashboardDB.GetExtendAmount());
                     }
                 }
@@ -205,27 +201,19 @@ namespace BackendHrdAgro.Controllers
                     if (AuthorizationFactory.Entrance(id: titleId) && AuthorizationFactory.Entrance(id: levelId))
                     {
                         Console.WriteLine("if1");
-                        // detail.Add(key: "Presence", dashboardDB.GetPresence(action: RetriveAction.DivisionId, id: divId));
+
                         detail.Add(key: "Presence", dashboardDB.GetPresence(titleId, employeeId, departmentId, levelId, divId));
-                       //detail.Add(key: "JumlahPunishment", dashboardDB.GetJumlahPunishment());
                         detail.Add(key: "JumlahApproval", dashboardDB.GetJumlahApproval(departmentId));
                         detail.Add(key: "JumlahTermination", dashboardDB.GetJumlahTermination());
                         detail.Add(key: "JumlahApprovalCuti", dashboardDB.GetJumlahApprovalCuti(departmentId, employeeId));
-                        //detail.Add(key: "JumlahApprovalPermission", dashboardDB.GetJumlahApprovalPermission(departmentId));
                         detail.Add(key: "JumlahExtend", dashboardDB.GetExtendAmount());
                     }
                     else if (AuthorizationFactory.Entrance(id: titleId))
                     {
                         Console.WriteLine("if2");
-
-                        //detail.Add(key: "Presence", dashboardDB.GetPresence(action: RetriveAction.DepartementId, id: departmentId));
                         detail.Add(key: "Presence", dashboardDB.GetPresence(titleId, employeeId, departmentId, levelId, divId));
-                        //    detail.Add(key: "JumlahPunishment", dashboardDB.GetJumlahPunishment());
                         detail.Add(key: "JumlahApproval", dashboardDB.GetJumlahApproval(departmentId));
-                        //detail.Add(key: "JumlahTermination", dashboardDB.GetJumlahTermination());
                         detail.Add(key: "JumlahApprovalCuti", dashboardDB.GetJumlahApprovalCuti(departmentId, employeeId));
-                        //detail.Add(key: "JumlahApprovalPermission", dashboardDB.GetJumlahApprovalPermission(departmentId));
-                        //   detail.Add(key: "JumlahExtend", dashboardDB.GetExtendAmount());
                         if (departmentId == "DP007")
                         {
                             detail.Add(key: "JumlahRequestIT", dashboardDB.GetJumlahRequestIT(employeeId, departmentId));
@@ -233,8 +221,6 @@ namespace BackendHrdAgro.Controllers
                     }
                     else
                     {
-                        //detail.Add(key: "Presence", dashboardDB.GetPresence(action: RetriveAction.EmployeeId, id: employeeId));
-
                         detail.Add(key: "Presence", dashboardDB.GetPresence(titleId, employeeId, departmentId, levelId, divId));
                         detail.Add(key: "JumlahRequestCuti", dashboardDB.GetJumlahRequestCuti(employeeId));
                         detail.Add(key: "JumlahRequest", dashboardDB.GetJumlahRequest(employeeId));
@@ -250,6 +236,7 @@ namespace BackendHrdAgro.Controllers
 
                 detail.Add(key: "JumlahIncomingLetters", dashboardDB.GetIncomingAmount(employeeId));
                 detail.Add(key: "JumlahCutiLong", dashboardDB.GetJumlahCutiLong(employeeId));
+                detail.Add(key: "JumlahReplacement", dashboardDB.GetJumlahCutiReplacement(employeeId)); //Replacement
                 detail.Add(key: "JumlahCutiAnnual", dashboardDB.GetJumlahCutiAnnual(employeeId));
                 detail.Add(key: "JumlahApprovalCutiDiv", dashboardDB.GetJumlahApprovalCutiDiv(employeeId, departmentId));
                 detail.Add(key: "JumlahApprovalDiv", dashboardDB.GetJumlahApprovalDiv(employeeId, departmentId));

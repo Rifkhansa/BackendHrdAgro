@@ -18,6 +18,17 @@ namespace BackendHrdAgro.Models.Leave
 {
     public class LeaveDB
     {
+        public List<TmTypeCuti> LeaveTypeFindOnlyReplacement() => new DatabaseContext().TmTypeCutis.Where(x => x.Status == 1 && x.TypeCutiId.Equals("CUT003")).ToList();
+
+        public List<TmTypeCuti> LeaveTypeFindOnlyAnnual()
+        {
+            var annualIds = new[] { "CUT001", "CUT005", "CUT006" };
+
+            return new DatabaseContext().TmTypeCutis
+                .Where(x => x.Status == 1 && annualIds.Contains(x.TypeCutiId))
+                .ToList();
+        }
+
         public List<TmTypeCuti> LeaveTypeFindOnlyLong() => new DatabaseContext().TmTypeCutis.Where(x => x.Status.Equals(1) && !x.TypeCutiId.Equals("CUT001")).ToList();
         public List<TmTypeCuti> LeaveTypeFind() => new DatabaseContext().TmTypeCutis.Where(x => x.Status.Equals(1)).ToList();
         public List<TmTypeCuti> LeaveTypeFind(string id) => new DatabaseContext().TmTypeCutis.Where(x => x.Status.Equals(1) && x.TypeCutiId.Equals(id)).ToList();
@@ -57,7 +68,7 @@ namespace BackendHrdAgro.Models.Leave
                 $"concat(b.employee_first_name, ' ', b.employee_last_name) as employee_name, c.nama_cuti, " +
                 $"case when a.status = 1 then 'Accepted' when a.status=0 then 'waiting' when a.status=5 then 'Rejected' end as my_status, " +
                 $"concat(d.employee_first_name,' ',d.employee_last_name) as approve_name, " +
-                $"e.sisa_cuti_annual,e.sisa_cuti_Maternity,e.sisa_cuti_long, " +
+                $"e.sisa_cuti_annual,e.sisa_cuti_Maternity,e.sisa_cuti_long,e.sisa_cuti_replacement, " +
                 $"case when a.type_cuti_id = 1 then case when DATE_FORMAT(a.request_date, '%d %M %Y') = DATE_FORMAT(now(), '%d %M %Y') then 1 else 0 end else 1 end as dimunculin, " +
                 $"b.level_id,'' as link_leave_del,'' as link_leave_app " +
                 $"from tp_cuti a  " +
@@ -99,13 +110,13 @@ namespace BackendHrdAgro.Models.Leave
             return list;
         }
 
-        public List<TotalLeave> TotalLeave(string departmentId)
+        public List<TotalLeave> TotalLeave(string departmentId, string employeeId)
         {
 
             string sql = "";
 
             string filter = "";
-            if (departmentId != null && departmentId != "DP006")
+            if (departmentId != null && departmentId != "DP003" && employeeId != "010116" && departmentId != "DP004")
             {
                 filter = $"and b.department_id  = '{departmentId}'";
             }
@@ -182,6 +193,7 @@ namespace BackendHrdAgro.Models.Leave
                     }
                     catch (Exception e)
                     {
+                        Console.WriteLine(e.InnerException == null ? e : e.InnerException);
                         System.Console.WriteLine(e.Message);
                         transaction.Rollback();
 
@@ -416,6 +428,9 @@ public class LeaveQuery
 
     [Column("sisa_cuti_long")]
     public float? SisaCutiLong { get; set; }
+
+    [Column("sisa_cuti_replacement")]
+    public float? SisaCutiReplacement { get; set; }
 
     [Column("dimunculin")]
     public int? DiMunculin { get; set; }

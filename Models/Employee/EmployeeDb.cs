@@ -102,6 +102,13 @@ namespace BackendHrdAgro.Models.Employee
             return reasonStatus;
         }
 
+        public List<BloodType> bloodTypes()
+        {
+            var sql = "select blood_type_id, blood_type_name from tm_blood_type a where a.status in (1,0,9) order by blood_type_name ASC";
+            var blood = new DatabaseContext().BloodTypes.FromSqlRaw(sql).ToList();
+            return blood;
+        }
+
         //GetOne
         public List<listFamily> listFamilies(getModel value)
         {
@@ -1090,16 +1097,16 @@ namespace BackendHrdAgro.Models.Employee
         public string? EmployeeLastName { get; set; }
 
         [Column("department_id")]
-        public string DepartmentId { get; set; }
+        public string? DepartmentId { get; set; }
 
         [Column("title_id")]
-        public string TitleId { get; set; }
+        public string? TitleId { get; set; }
 
         [Column("level_id")]
-        public string LevelId { get; set; }
+        public string? LevelId { get; set; }
 
         [Column("employee_status_id")]
-        public string EmployeeStatusId { get; set; }
+        public string? EmployeeStatusId { get; set; }
 
         [Column("joint_date")]
         public DateTime? JointDate { get; set; }
@@ -1111,25 +1118,25 @@ namespace BackendHrdAgro.Models.Employee
         public DateTime? PermanentDate { get; set; }
 
         [Column("tempat_lahir")]
-        public string TempatLahir { get; set; }
+        public string? TempatLahir { get; set; }
 
         [Column("tanggal_lahir")]
         public DateTime? TanggalLahir { get; set; }
 
         [Column("alamat")]
-        public string Alamat { get; set; }
+        public string? Alamat { get; set; }
 
         [Column("alamat_tinggal")]
-        public string AlamatTinggal { get; set; }
+        public string? AlamatTinggal { get; set; }
 
         [Column("religi_id")]
         public string? ReligiId { get; set; }
 
         [Column("gender_id")]
-        public string GenderId { get; set; }
+        public string? GenderId { get; set; }
 
         [Column("married_id")]
-        public string MarriedId { get; set; }
+        public string? MarriedId { get; set; }
 
         [Column("bank_id")]
         public string? BankId { get; set; }
@@ -1156,31 +1163,31 @@ namespace BackendHrdAgro.Models.Employee
         public string? UserUpdate { get; set; }
 
         [Column("my_status")]
-        public string MyStatus { get; set; }
+        public string? MyStatus { get; set; }
 
         [Column("bank_name")]
         public string? BankName { get; set; }
 
         [Column("department_name")]
-        public string DepartmentName { get; set; }
+        public string? DepartmentName { get; set; }
 
         [Column("title_name")]
-        public string TitleName { get; set; }
+        public string? TitleName { get; set; }
 
         [Column("religi_name")]
         public string? ReligiName { get; set; }
 
         [Column("level_name")]
-        public string LevelName { get; set; }
+        public string? LevelName { get; set; }
 
         [Column("gender_name")]
-        public string GenderName { get; set; }
+        public string? GenderName { get; set; }
 
         [Column("employee_status_name")]
-        public string EmployeeStatusName { get; set; }
+        public string? EmployeeStatusName { get; set; }
 
         [Column("married_name")]
-        public string MarriedName { get; set; }
+        public string? MarriedName { get; set; }
 
         [Column("termination_date")]
         public DateTime? TerminationDate { get; set; }
@@ -1196,6 +1203,18 @@ namespace BackendHrdAgro.Models.Employee
 
         [Column("permanent_date_view")]
         public string? PermanentDateView { get; set; }
+
+    }
+
+
+    [Keyless]
+    public class BloodType
+    {
+        [Column("blood_type_id")]
+        public int BloodTypeId { get; set; }
+
+        [Column("blood_type_name")]
+        public string BloodTypeName { get; set; }
 
     }
 

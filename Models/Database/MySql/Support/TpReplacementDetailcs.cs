@@ -8,27 +8,22 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BackendHrdAgro.Models;
 
-[Table("tm_type_cuti")]
+[Table("tp_replacement_detail")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public partial class TmTypeCuti
+
+public partial class TpReplacementDetail
 {
     [Key]
-    [Column("type_cuti_id")]
-    [StringLength(10)]
-    public string TypeCutiId { get; set; }
+    [Column("id")]
+    [StringLength(25)]
+    public string Id { get; set; }
 
     [Required]
-    [Column("nama_cuti")]
-    [StringLength(21)]
-    public string NamaCuti { get; set; }
+    [Column("replacement_id")]
+    [StringLength(25)]
+    public string ReplacementId { get; set; }
 
-    [Column("status")]
-    public int Status { get; set; }
-
-    [Column("is_cut")]
-    public int IsCut { get; set; }
-
-    [Column("qty")]
-    public int QTY { get; set; }
+    [Column("replacement_date")]
+    public DateTime ReplacementDate { get; set; }
 }
