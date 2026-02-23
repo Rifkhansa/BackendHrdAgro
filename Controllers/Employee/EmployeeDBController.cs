@@ -45,8 +45,8 @@ namespace BackendHrdAgro.Controllers.Employee
                 string[] arrayTitle = { "DS002", "DS003" };
                 string[] arrayDept =
                 {
-                    "DP006", //HRD
-                    "DP010" //BOD
+                    "DP003", //HRD
+                    "DP004" //BOD
                 };
 
                 var findSessionData = userDB.FindSessionDataUser(id);
